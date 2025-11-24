@@ -608,6 +608,13 @@ app = Flask(__name__)
 def home():
     return "Bot is running on Render!"
 
+import requests
+try:
+    r = requests.get("https://api.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT", timeout=10)
+    print("TEST RESPONSE:", r.text[:200])
+except Exception as e:
+    print("TEST FAILED:", e)
+
 def start_bot():
     API_KEY = os.getenv('BYBIT_API_KEY')
     API_SECRET = os.getenv('BYBIT_API_SECRET')
