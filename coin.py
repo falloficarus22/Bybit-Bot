@@ -602,8 +602,8 @@ if __name__ == "__main__":
     # Get API credentials from environment variables (recommended)
     import os
     
-    API_KEY = os.getenv('BYBIT_API_KEY', 'sl1PhFd6TwQLVbqYkU')
-    API_SECRET = os.getenv('BYBIT_API_SECRET', 'cjTsTbhhAFiLgWqp51hP2WETFrOHDx0OhDJd')
+    API_KEY = os.getenv('BYBIT_API_KEY')
+    API_SECRET = os.getenv('BYBIT_API_SECRET')
     
     # Initialize bot
     bot = BybitTradingBot(
