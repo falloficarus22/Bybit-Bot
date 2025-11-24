@@ -3,3 +3,4 @@ numpy
 requests
 logging
 python-dotenv
+flask
