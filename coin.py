@@ -598,20 +598,33 @@ class BybitTradingBot:
                 logging.error(traceback.format_exc())
                 time.sleep(60)
 
-if __name__ == "__main__":
-    # Get API credentials from environment variables (recommended)
-    import os
-    
+from flask import Flask
+import threading
+import os
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running on Render!"
+
+def start_bot():
     API_KEY = os.getenv('BYBIT_API_KEY')
     API_SECRET = os.getenv('BYBIT_API_SECRET')
-    
-    # Initialize bot
+
     bot = BybitTradingBot(
         api_key=API_KEY,
         api_secret=API_SECRET,
-        test_mode=False,  # Set to False for live trading
-        testnet=False    # Set to True to use testnet
+        test_mode=False,   # real trading
+        testnet=False      # mainnet
     )
-    
-    # Run the bot
+
     bot.run()
+
+if __name__ == "__main__":
+    # Start bot in background
+    threading.Thread(target=start_bot).start()
+
+    # Start web server (keeps Render alive)
+    app.run(host="0.0.0.0", port=10000)
+    
